@@ -1,2 +1,4 @@
-Projeto 1 - códigos da aula 2 - componentes
-Projeto 2 - códigos da aula 3 - props
+- Projeto 1 - códigos da aula 2 - componentes
+- Projeto 2 - códigos da aula 3 - props
+- exercicioAula3 - códigos exercício da aula 3
+- exercicioAula4 - cópia dos códigos do exercício da aula 3, com modificações para o exercício da aula 4 (não copiar pasta, seguir processo vite)

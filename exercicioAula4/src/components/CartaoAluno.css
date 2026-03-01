@@ -6,7 +6,7 @@ button {
   font-weight: 550;
   font-family: inherit;
   color:rgb(12, 12, 49);
-  background-color: #c8ced6;
+  background-color: red;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -17,7 +17,10 @@ button:focus {
   outline: 4px auto rgb(39, 39, 87)
 }
 
-.titulo {
-  font-size: 3.2em;
-  line-height: 1.1;
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1em;
+  margin: 1em;
+  background-color: #f9f9f9;
 }
