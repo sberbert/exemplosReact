@@ -29,6 +29,9 @@ function App() {
     const novasTarefas = tarefas.filter((_, i) => i !== index)
     setTarefas(novasTarefas)
   }  
+
+  const tarefasConcluidas = tarefas.filter(tarefa => tarefa.concluida)
+  const tarefasNaoConcluidas = tarefas.filter(tarefa => !tarefa.concluida)
   
     return (
     <>
@@ -57,6 +60,10 @@ function App() {
 
         ))}
       </ul>
+
+      <p>Total de tarefas: {tarefas.length}</p>
+      <p>Tarefas concluídas: {tarefasConcluidas.length}</p>
+      <p>Tarefas não concluídas: {tarefasNaoConcluidas.length}</p>      
 
     </>
   )
