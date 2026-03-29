@@ -1,0 +1,12 @@
+html{
+  font-family: Arial, sans-serif;
+  color:rgb(12, 12, 49)
+}
+
+body {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
