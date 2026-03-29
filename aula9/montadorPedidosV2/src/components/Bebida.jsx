@@ -14,5 +14,4 @@ function Bebida({ bebida, setBebida, quantidade }) {
     </>
   )
 }
-
 export default Bebida
