@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Formulario from "./components/Formulario"
-import Pedido from "./components/Pedido-v2"
+import Pedido from "./components/Pedido"
 import Contador from "./components/Contador"
 import Bebida from "./components/Bebida"
 
@@ -12,8 +12,6 @@ function App() {
 
   const [pedidos, setPedidos] = useState([]) // Array para armazenar os pedidos
 
-  const qtdPedidos = pedidos.length
-
   // Função para adicionar um novo pedido ao array de pedidos
   function adicionarPedido() {
     if (!nome || !lanche || quantidade === 0) return // verificação de campos preenchidos
@@ -21,18 +19,7 @@ function App() {
       const novoPedido = { nome, lanche, quantidade, bebida }
       
       setPedidos([...pedidos, novoPedido]) // Adiciona o novo pedido ao array de pedidos  
-      
-      setNome("") // Limpa o campo de nome
-      setLanche("") // Limpa o campo de lanche
-      setQuantidade(0) // Reseta a quantidade
-      setBebida(false) // Reseta a bebida
   }
-
-  function removerPedido(indiceRemover) {
-    // Cria uma nova lista sem o pedido a ser removido
-    const novaLista = pedidos.filter((item, index) => index !== indiceRemover) 
-    setPedidos(novaLista)
-  }  
   
   return (
     <>
@@ -61,27 +48,18 @@ function App() {
       <br /><br />
 
       <button onClick={adicionarPedido}>
-        👍 Adicionar Pedido
+        Adicionar Pedido
       </button>
-
-      {qtdPedidos === 0 && <p><small>Não há pedidos ainda.</small></p>}
-
-      {qtdPedidos > 0 && (
-        <>
-          <p><small>Há {qtdPedidos} pedido(s).</small></p>
-
-          {pedidos.map((pedido, index) => (
-            <Pedido
-              key={index}
-              nome={pedido.nome}
-              lanche={pedido.lanche}
-              quantidade={pedido.quantidade}
-              bebida={pedido.bebida}
-              aoRemover={() => removerPedido(index)} // Passa a função de remoção para o componente Pedido
-            />
-          ))}
-        </>
-      )}
+ 
+      {pedidos.map((pedido, index) => (
+        <Pedido
+          key={index} //para identificar cada pedido de forma única (para o react e não para o componente)
+          nome={pedido.nome}
+          lanche={pedido.lanche}
+          quantidade={pedido.quantidade}
+          bebida={pedido.bebida}
+        />
+      ))}
     </>
   )
 }

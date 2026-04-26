@@ -1,6 +1,6 @@
 import { useState } from "react"
 import Formulario from "./components/Formulario"
-import Pedido from "./components/Pedido-v2"
+import Pedido from "./components/Pedido"
 import Contador from "./components/Contador"
 import Bebida from "./components/Bebida"
 
@@ -9,14 +9,14 @@ function App() {
   const [lanche, setLanche] = useState("")
   const [bebida, setBebida] = useState(false)
   const [quantidade, setQuantidade] = useState(0)
-
-  const [pedidos, setPedidos] = useState([]) // Array para armazenar os pedidos
+  const [pedidos, setPedidos] = useState([])
+  
+  const [indiceEdicao, setIndiceEdicao] = useState(null) // Estado para armazenar o índice do pedido em edição (null quando não estiver editando)
 
   const qtdPedidos = pedidos.length
 
-  // Função para adicionar um novo pedido ao array de pedidos
   function adicionarPedido() {
-    if (!nome || !lanche || quantidade === 0) return // verificação de campos preenchidos
+    if (!nome || !lanche || quantidade === 0) return 
 
       const novoPedido = { nome, lanche, quantidade, bebida }
       
@@ -32,6 +32,42 @@ function App() {
     // Cria uma nova lista sem o pedido a ser removido
     const novaLista = pedidos.filter((item, index) => index !== indiceRemover) 
     setPedidos(novaLista)
+  }  
+
+  function editarPedido(index) { // Função para iniciar a edição de um pedido
+    const pedido = pedidos[index]
+    setNome(pedido.nome)
+    setLanche(pedido.lanche)
+    setQuantidade(pedido.quantidade)
+    setBebida(pedido.bebida)
+    setIndiceEdicao(index)
+  }  
+
+  function salvarEdicao() {
+    const novaLista = pedidos.map((pedido, index) => {
+      if (index === indiceEdicao) {
+        return { nome, lanche, quantidade, bebida } // Retorna o pedido atualizado
+      }
+      return pedido
+    })
+
+    setPedidos(novaLista) // Atualiza a lista de pedidos com o pedido editado 
+    setIndiceEdicao(null) // Reseta o índice de edição  
+
+
+    setNome("") // Limpa o campo de nome
+    setLanche("") // Limpa o campo de lanche
+    setQuantidade(0) // Reseta a quantidade
+    setBebida(false) // Reseta a bebida        
+  } 
+
+  function cancelarEdicao() {
+    setNome("")
+    setLanche("")
+    setQuantidade(0)
+    setBebida(false)
+
+    setIndiceEdicao(null)
   }  
   
   return (
@@ -60,9 +96,19 @@ function App() {
 
       <br /><br />
 
-      <button onClick={adicionarPedido}>
+      {/*<button onClick={adicionarPedido}>
         👍 Adicionar Pedido
-      </button>
+      </button>*/}
+
+      <button onClick={indiceEdicao === null ? adicionarPedido : salvarEdicao}> 
+        {indiceEdicao === null ? "👍 Adicionar" : " ✏️ Salvar"}
+      </button>      
+
+      {indiceEdicao !== null && (
+        <button onClick={cancelarEdicao}>
+          🚫 Cancelar Edição
+        </button>
+      )}
 
       {qtdPedidos === 0 && <p><small>Não há pedidos ainda.</small></p>}
 
@@ -77,13 +123,14 @@ function App() {
               lanche={pedido.lanche}
               quantidade={pedido.quantidade}
               bebida={pedido.bebida}
-              aoRemover={() => removerPedido(index)} // Passa a função de remoção para o componente Pedido
+              aoRemover={() => removerPedido(index)}
+              aoEditar={() => editarPedido(index)} // Passa a função de edição para o componente Pedido
             />
           ))}
         </>
       )}
     </>
   )
-}
+  }
 
 export default App
