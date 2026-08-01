@@ -1,3 +1,4 @@
+//versao com useEffect que automaticamente faz a requisição para a API e atualiza o estado do pokemon com os dados recebidos
 import { useState, useEffect } from 'react'
 
 function App() {
