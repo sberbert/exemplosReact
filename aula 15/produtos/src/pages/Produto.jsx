@@ -26,7 +26,7 @@ function Produto() {
     )
 
     if (!produto) {
-    return <p>Produto não encontrado.</p>
+    return <p>🛑 Produto não encontrado.</p>
     }
 
  return (
