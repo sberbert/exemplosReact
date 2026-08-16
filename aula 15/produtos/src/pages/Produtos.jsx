@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 
 function Produtos(){
 
+    // Simulando uma lista de produtos
     const produtos = [
         {
             id: 1,
