@@ -70,35 +70,49 @@
     }
   }
 
-  //PUT - ATUALIZAR CONTATO
-  if ($metodo == "PUT") {
+// PUT - ALTERAR STATUS
+if ($metodo == "PUT") {
 
-    // Recupera os dados enviados no corpo da requisição
-    $dados = json_decode(file_get_contents("php://input"), true);
-    $id     = $dados["id"];
-    $nome     = $dados["nome"];
-    $email    = $dados["email"];
-    $assunto  = $dados["assunto"];
-    $mensagem = $dados["mensagem"];
+  $dados = json_decode(
+    file_get_contents("php://input"),
+    true
+  );
 
-    $sql = "UPDATE contatos
-        SET
-        nome = :nome,
-        email = :email,
-        assunto = :assunto,
-        mensagem = :mensagem
-      WHERE id = :id";
-    
+  $id = $dados["id"];
+  $status = $dados["status"];
+
+  $sql = "UPDATE contatos
+          SET status = :status
+          WHERE id = :id";
+
+  $stmt = $pdo->prepare($sql);
+
+  $stmt->execute([
+    ":status" => $status,
+    ":id" => $id
+  ]);
+
+  echo json_encode([
+    "sucesso" => true,
+    "mensagem" => "Status atualizado com sucesso!"
+]);
+
+  exit;
+}
+
+
+if ($metodo == "DELETE") {
+
+    $id = $_GET["id"];
+
+    $sql = "DELETE FROM contatos WHERE id = :id";
+
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(":nome", $nome);
-    $stmt->bindParam(":email", $email);
-    $stmt->bindParam(":assunto", $assunto);
-    $stmt->bindParam(":mensagem", $mensagem);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    
+
     echo json_encode([
-      "sucesso" => true,
-      "mensagem" => "Contato atualizado com sucesso!"
+        "sucesso" => true,
+        "mensagem" => "Contato excluído com sucesso!"
     ]);
-  }
+}  

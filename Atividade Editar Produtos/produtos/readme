@@ -1,0 +1,41 @@
+Considerar:
+
+React rodando em localhost:5173
+PHP rodando em localhost:8000
+
+banco loja
+tabela contatos
+formulário sem Bootstrap
+POST para cadastrar
+GET para consultar
+mensagem de sucesso na tela
+
+--
+
+Desafio para casa
+
+Enviar o formulário por e-mail usando PHPMailer + Gmail pessoal.
+
+O aluno poderá:
+
+Criar uma conta Gmail para o projeto.
+Ativar a verificação em duas etapas.
+Criar uma senha de app.
+Instalar o PHPMailer.
+Configurar o contato.php para enviar a mensagem pelo Gmail.
+
+Assim, não dependemos da infraestrutura da Unicamp durante a aula.
+
+---
+
+function formatarData(data) {
+  return new Date(data).toLocaleString("pt-BR", {
+    dateStyle: "short",
+    timeStyle: "short"
+  })
+}
+
+e n o jsx
+<p>
+  <b>Data:</b> {formatarData(contato.data_envio)}
+</p>
