@@ -1,12 +1,19 @@
   <?php
 
   // Configurações de cabeçalho para permitir requisições de diferentes origens
-  header("Access-Control-Allow-Origin: http://localhost:5173");
+  //header("Access-Control-Allow-Origin: http://localhost:5173");
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: POST, GET, PUT, DELETE, OPTIONS");
   header("Access-Control-Allow-Headers: Content-Type");
-  header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE"); // Permite métodos GET, POST, PUT e DELETE
+
+  // Permite que o navegador faça uma requisição OPTIONS para verificar os métodos permitidos
+  if ($_SERVER["REQUEST_METHOD"] == "OPTIONS") {
+      exit;
+  }
+
   header("Content-Type: application/json");
 
-  $pdo = new PDO("mysql:host=143.106.241.4;dbname=simone", "simone", "vida280112");
+  $pdo = new PDO("mysql:host=143.106.241.4;dbname=cl", "cl", "senha");
 
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
