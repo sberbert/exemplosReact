@@ -13,7 +13,7 @@
 
   header("Content-Type: application/json");
 
-  $pdo = new PDO("mysql:host=143.106.241.4;dbname=simone", "simone", "vida280112");
+  $pdo = new PDO("mysql:host=143.106.241.4;dbname=cl", "cl", "senha");
 
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
